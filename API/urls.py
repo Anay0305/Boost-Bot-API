@@ -1,5 +1,8 @@
 from django.urls import path
-from .views import generate_key, get_info, redeem_key, authorize, refresh_token, receive_results, autobuy, get_order_info, delete_key
+from django.conf.urls import handler404
+from .views import generate_key, get_info, redeem_key, authorize, refresh_token, receive_results, autobuy, get_order_info, delete_key, custom_404
+
+handler404 = custom_404
 
 urlpatterns = [
     path("key/get_info", get_info, name="get_info"),

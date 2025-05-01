@@ -1,7 +1,7 @@
 import json
 import secrets
 from datetime import timedelta
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.utils import timezone
@@ -23,6 +23,9 @@ autobuy_data = {}
 TOKEN_EXPIRY_SECONDS = 3600
 MAX_WAIT_SECONDS = 120
 WAIT_INTERVAL = 5
+
+def custom_404(request, exception):
+    return redirect('/stock')
 
 def censor_key_parts(key):
     parts = key.split('-')
