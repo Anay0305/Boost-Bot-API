@@ -28,4 +28,4 @@ else:
     print(f"✅ Superuser '{username}' already exists.")
 
 print("🚀 Starting Uvicorn server...")
-uvicorn.run("WebApp.asgi:application", host="0.0.0.0", port=8000)
+uvicorn.run("WebApp.asgi:application", host="0.0.0.0", port=44062)
