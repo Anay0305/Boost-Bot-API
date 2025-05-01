@@ -1,0 +1,29 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redeem Panel</title>
+    <link rel="stylesheet" href="{% static 'Key/redeem/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Redeem Panel</h1>
+        <div class="inputs" id="inputs">
+            <p class="hide" id="redeemMessage"></p>
+            <input type="text" id="redeemCode" placeholder="Enter code here">
+            <input type="text" id="serverInvite" placeholder="Enter server invite here">
+            <button id="redeemButton" onclick="Redeemclick()">Redeem</button>
+        </div>
+        <div class="complete hide" id="complete">
+            <p class="hide" id="completeMessage"></p>
+            <button id="closeButton" onclick="Closeclick()">Close</button>
+        </div>
+    </div>
+    <div class="links">
+        <a href="https://discord.gg/4X2Y3v8" class="footer-button discord" target="_blank">Join Discord</a>
+        <a href="https://quickboostsxd.mysellauth.com/" class="footer-button autobuy" target="_blank">Autobuy</a>
+    </div>
+    <script src="{% static 'Key/redeem/script.js' %}"></script>
+</body>
+</html>

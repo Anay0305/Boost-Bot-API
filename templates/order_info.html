@@ -1,0 +1,31 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Info</title>
+    <link rel="stylesheet" href="{% static 'order/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <span class="status {{ status_class }}"><strong>Order Status:</strong><br> {{ status }}</span>
+        <p class="status-message {{ status_message_class }}">{{ message }}</p>
+        <ul class="key-info-list">
+            <li onclick="copyToClipboard('{{ order_id }}')"><strong>Order Id:</strong> {{ order_id }}</li>
+            <li><strong>Service:</strong> {{ service }}</li>
+            <li><strong>Requested Boosts:</strong> {{ amount }}</li>
+            <li><strong>Completed Boosts:</strong> {{ completed }}</li>
+            <li><strong>Months:</strong> {{ months }}</li>
+            <li onclick="copyToClipboard('{{ server_id }}')"><strong>Server Id:</strong> {{ server_id }}</li>
+            <li><strong>Ordered At:</strong> {{ ordered_at }}</li>
+            <li><strong>Finished At:</strong> {{ finished_at }}</li>
+        </ul>
+        <a href={{ server_invite }} class="footer-button invite" target="_blank">Server invite</a>
+    </div>
+    <div class="links">
+        <a href="https://discord.gg/4X2Y3v8" class="footer-button discord" target="_blank">Join Discord</a>
+        <a href="https://quickboostsxd.mysellauth.com/" class="footer-button autobuy" target="_blank">Autobuy</a>
+    </div>
+    <script src="{% static 'order/script.js' %}" defer></script>
+</body>
+</html>

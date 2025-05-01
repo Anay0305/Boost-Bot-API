@@ -1,0 +1,28 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Live Stock</title>
+    <link rel="stylesheet" href="{% static 'stock/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Live Stock</h1>
+        <ul class="key-info-list">
+            <div class="heading"><strong>1 Month</strong></div>
+            <div class="heading"><strong>3 Months</strong> {{ service }}</div>
+            <li><strong>Available:</strong> {{ 1m_ava }}</li>
+            <li><strong>Available:</strong> {{ 3m_ava }}</li>
+            <li><strong>In Use:</strong> {{ 1m_inuse }}</li>
+            <li><strong>In Use:</strong> {{ 3m_inuse }}</li>
+            <li><strong>Total:</strong> {{ 1m_total }}</li>
+            <li><strong>Total:</strong> {{ 3m_total }}</li>
+        </ul>
+    </div>
+    <div class="links">
+        <a href="https://discord.gg/4X2Y3v8" class="footer-button discord" target="_blank">Join Discord</a>
+        <a href="https://quickboostsxd.mysellauth.com/" class="footer-button autobuy" target="_blank">Autobuy</a>
+    </div>
+</body>
+</html>

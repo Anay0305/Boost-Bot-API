@@ -1,0 +1,30 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Key Info</title>
+    <link rel="stylesheet" href="{% static 'Key/info/redeemed_styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Key Info</h1>
+        <ul class="key-info-list">
+            <li onclick="copyToClipboard('{{ key }}')"><strong>Key:</strong> {{ key }}</li>
+            <li onclick="copyToClipboard('{{ order_id }}')"><strong>Order Id:</strong> {{ order_id }}</li>
+            <li><strong>Status:</strong> {{ status }}</li>
+            <li><strong>Amount:</strong> {{ amount }}</li>
+            <li><strong>Months:</strong> {{ months }}</li>
+            <li onclick="copyToClipboard('{{ server_id }}')"><strong>Server Id:</strong> {{ server_id }}</li>
+            <li><strong>Created At:</strong> {{ created_at }}</li>
+            <li><strong>Redeemed At:</strong> {{ redeemed_at }}</li>
+        </ul>
+        <a href={{ server_invite }} class="footer-button invite" target="_blank">Server invite</a>
+    </div>
+    <div class="links">
+        <a href="https://discord.gg/4X2Y3v8" class="footer-button discord" target="_blank">Join Discord</a>
+        <a href="https://quickboostsxd.mysellauth.com/" class="footer-button autobuy" target="_blank">Autobuy</a>
+    </div>
+    <script src="{% static 'Key/info/redeemed_script.js' %}" defer></script>
+</body>
+</html>
