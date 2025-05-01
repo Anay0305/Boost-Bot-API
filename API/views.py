@@ -19,8 +19,6 @@ import time
 import re
 import requests
 
-ACCESS_TOKENS = {}
-REFRESH_TOKENS = {}
 autobuy_data = {}
 TOKEN_EXPIRY_SECONDS = 3600
 MAX_WAIT_SECONDS = 120
