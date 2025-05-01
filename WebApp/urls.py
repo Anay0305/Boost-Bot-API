@@ -20,6 +20,8 @@ from django.conf.urls import handler404
 from API.views import show_info, redeem, live_stock, show_order_info, custom_404
 
 urlpatterns = [
+    path('/', custom_404, name='custom_404'),
+    path('', custom_404, name='stock'),
     path('admin/', admin.site.urls),
     path("key/info/", show_info, name="info"),
     path("key/redeem/", redeem, name="redeem"),
@@ -29,4 +31,4 @@ urlpatterns = [
 ]
 
 
-handler404 = 'API.views.custom_404'
+#handler404 = 'API.views.custom_404'
