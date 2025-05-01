@@ -23,8 +23,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-8!dou^tct9*j8sztv+*8wx9=rqastcz###!q&i913(0@+v+h-+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ALLOWED_HOSTS = ['*']
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://boostbot.rhhosting.pro',  # Add your domain here
+    'http://boostbot.rhhosting.pro',   # Optionally allow non-secure HTTP (if needed)
+]
 
 INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
