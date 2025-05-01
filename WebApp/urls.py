@@ -16,7 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from API.views import show_info, redeem, live_stock, show_order_info
+from django.conf.urls import handler404
+from API.views import show_info, redeem, live_stock, show_order_info, custom_404
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,3 +27,6 @@ urlpatterns = [
     path('order/', show_order_info, name='show_order_info'),
     path('api/', include('API.urls')),
 ]
+
+
+handler404 = 'API.views.custom_404'
