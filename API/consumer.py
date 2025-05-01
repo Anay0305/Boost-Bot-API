@@ -30,6 +30,6 @@ class BoostConsumer(AsyncWebsocketConsumer):
         print(f"Query sent to {self.channel_name}: {event['data']}")
 
     async def authenticate_token(self, token):
-        if token == "secrettoken123":
+        if token == "2272ae95d39833092b48de480cdd0c3244f20098859d6a44b69ddf641b5bd4be":
             return True
         return False
