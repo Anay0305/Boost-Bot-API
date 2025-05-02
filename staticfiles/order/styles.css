@@ -35,8 +35,7 @@
   
   body {
     overflow-x: hidden;
-    background: linear-gradient(135deg, #0a0a0a 0%, #1c1c1c 35%, #223344 70%, #0a0a0a 100%);
-
+    background: linear-gradient(135deg, #0e0e0e 0%, #162225 40%, #264b4e 75%, #0e0e0e 100%);
     background-attachment: fixed;
     background-size: cover;
     -webkit-box-sizing: border-box;
