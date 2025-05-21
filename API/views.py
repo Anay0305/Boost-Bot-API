@@ -33,6 +33,8 @@ def censor_key_parts(key):
     return '-'.join(masked)
 
 def check_invite(invite):
+    if not invite:
+        return None
     if invite.startswith("https://"):
         return invite
     else:
@@ -69,8 +71,8 @@ def token_required(view_func):
         access_token = auth_header.split("Bearer ")[1]
         try:
             token = Token.objects.get(access_token=access_token)
-            if token.is_expired():
-                return JsonResponse({"error": "Token expired"}, status=401)
+            #if token.is_expired():
+            #    return JsonResponse({"error": "Token expired"}, status=401)
         except Token.DoesNotExist:
             return JsonResponse({"error": "Invalid token"}, status=401)
 
@@ -363,25 +365,27 @@ def get_info(request):
                     redeemed_at = redeem_code.redeemed_at.strftime("%Y-%m-%d %H:%M:%S")
                 else:
                     redeemed_at = None
-                try:
-                    Order_ = Order.objects.get(order_id=redeem_code.order_id)
-                    if not Order_.finished_at:
-                        status = "Pending"
-                    else:
-                        if Order_.completed == 0:
-                            status = "Incompleted"
-                        elif Order_.completed == Order_.amount:
-                            status = "Completed"
+                order_status = "Pending"
+                message = None
+                completed = 0
+                if redeem_code.order_id:
+                    try:
+                        Order_ = Order.objects.get(order_id=redeem_code.order_id)
+                        if not Order_.finished_at:
+                            order_status = "Pending"
                         else:
-                            percent = round((Order_.completed / Order_.amount) * 100)
-                            status = f"Completed {percent}%"
-                        completed = Order_.completed
-                        message = Order_.message,
-                except Order.DoesNotExist:
-                    status = "Pending"
-                    completed = None
-                    message = None
-                return JsonResponse({
+                            if Order_.completed == 0:
+                                order_status = "Incompleted"
+                            elif Order_.completed == Order_.amount:
+                                order_status = "Completed"
+                            else:
+                                percent = round((Order_.completed / Order_.amount) * 100)
+                                order_status = f"Completed {percent}%"
+                            completed = Order_.completed
+                            message = Order_.message
+                    except:
+                        pass
+                data = {
                     'status': status,
                     'key': redeem_code.key,
                     'order_id': redeem_code.order_id,
@@ -389,13 +393,13 @@ def get_info(request):
                     'server_invite': check_invite(redeem_code.server_invite),
                     'amount': redeem_code.amount,
                     'months': redeem_code.months,
-                    'redeemed': redeem_code.redeemed,
-                    'status': status,
+                    'order_status': order_status,
                     'created_at': redeem_code.created_at.strftime("%Y-%m-%d %H:%M:%S"),
                     'redeemed_at': redeemed_at,
                     'message': message,
                     'completed': completed,
-                })
+                }
+                return JsonResponse(data)
             except RedeemCode.DoesNotExist:
                 return JsonResponse({"error": "Key not found"}, status=200)
         else:
