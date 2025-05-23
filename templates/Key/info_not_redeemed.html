@@ -17,9 +17,15 @@
             <li><strong>Created At:</strong> {{ created_at }}</li>
         </ul>
     </div>
+    {% if discord_link or autobuy_link %}
     <div class="links">
-        <a href="https://discord.gg/4X2Y3v8" class="footer-button discord" target="_blank">Join Discord</a>
-        <a href="https://quickboostsxd.mysellauth.com/" class="footer-button autobuy" target="_blank">Autobuy</a>
+        {% if discord_link %}
+            <a href="{{ discord_link }}" class="footer-button discord" target="_blank">Join Discord</a>
+        {% endif %}
+        {% if autobuy_link %}
+            <a href="{{ autobuy_link }}" class="footer-button autobuy" target="_blank">Autobuy</a>
+        {% endif %}
     </div>
+    {% endif %}
 </body>
 </html>

@@ -18,6 +18,21 @@ import uuid
 import time
 import re
 import requests
+import yaml
+
+def is_valid_href(url):
+    return isinstance(url, str) and url.startswith(('http://', 'https://'))
+
+try:
+    with open('config.yaml', 'r') as file:
+        CONFIG = yaml.safe_load(file)
+    discord_link = CONFIG.get('DISCORD_LINK')
+    autobuy_link = CONFIG.get('AUTOBUY_LINK')
+    discord_link = discord_link if is_valid_href(discord_link) else None
+    autobuy_link = autobuy_link if is_valid_href(autobuy_link) else None
+except:
+    discord_link = None
+    autobuy_link = None
 
 autobuy_data = {}
 TOKEN_EXPIRY_SECONDS = 3600
@@ -267,6 +282,8 @@ def live_stock(request):
                 '3m_ava': data['3_month']['available'] * 2,
                 '3m_inuse': data['3_month']['in_use'] * 2,
                 '3m_total': data['3_month']['total'] * 2,
+                'discord_link': discord_link,
+                'autobuy_link': autobuy_link
             })
         if time.time() - start_time > MAX_WAIT_SECONDS:
             return JsonResponse({"error": "Timeout waiting for result"}, status=504)
@@ -317,7 +334,10 @@ def delete_key(request):
     return JsonResponse({"error": "Invalid method"}, status=405)
 
 def redeem(request):
-    return render(request, 'Key/redeem.html')
+    return render(request, 'Key/redeem.html', {
+                'discord_link': discord_link,
+                'autobuy_link': autobuy_link
+            })
 
 def show_info(request):
     key = request.GET.get('key')
@@ -332,7 +352,9 @@ def show_info(request):
                     'months': redeem_code.months,
                     'redeemed': redeem_code.redeemed,
                     'status': status,
-                    'created_at': redeem_code.created_at
+                    'created_at': redeem_code.created_at,
+                    'discord_link': discord_link,
+                    'autobuy_link': autobuy_link
                 })
             else:
                 return render(request, 'Key/info_redeemed.html', {
@@ -345,12 +367,20 @@ def show_info(request):
                     'redeemed_at': redeem_code.redeemed_at,
                     'order_id': redeem_code.order_id,
                     'server_id': redeem_code.server_id,
-                    'server_invite': check_invite(redeem_code.server_invite)
-                })
+                    'server_invite': check_invite(redeem_code.server_invite),
+                    'discord_link': discord_link,
+                    'autobuy_link': autobuy_link
+                    })
         except RedeemCode.DoesNotExist:
-            return render(request, 'Key/nokey.html')
+            return render(request, 'Key/nokey.html', {
+                'discord_link': discord_link,
+                'autobuy_link': autobuy_link
+            })
     else:
-        return render(request, 'Key/nokey.html')
+        return render(request, 'Key/nokey.html', {
+                'discord_link': discord_link,
+                'autobuy_link': autobuy_link
+            })
 
 @csrf_exempt
 def get_info(request):
@@ -547,7 +577,7 @@ def receive_results(request):
                 )
 
             return JsonResponse({"status": "success", "message": "Result received successfully"})
-        
+
         except json.JSONDecodeError:
             return JsonResponse({"error": "Invalid JSON format"}, status=400)
         except Exception as e:
@@ -593,11 +623,19 @@ def show_order_info(request):
                     'message': Order_.message,
                     'status_class': status_class,
                     'status_message_class': status_message_class,
+                    'discord_link': discord_link,
+                    'autobuy_link': autobuy_link
                 })
         except Order.DoesNotExist:
-            return render(request, 'no_order.html')
+            return render(request, 'no_order.html', {
+                    'discord_link': discord_link,
+                    'autobuy_link': autobuy_link
+                })
     else:
-        return render(request, 'no_order.html')
+        return render(request, 'no_order.html', {
+                    'discord_link': discord_link,
+                    'autobuy_link': autobuy_link
+                })
     
 @csrf_exempt
 @token_required

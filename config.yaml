@@ -1,3 +1,5 @@
+#everything here is without ""
+
 SUPERUSER:
   USERNAME: admin
   PASSWORD: admin123
@@ -6,3 +8,7 @@ SUPERUSER:
 PORT: 8080
 
 BASE_URL: 
+
+DISCORD_LINK: 
+
+AUTOBUY_LINK: 
