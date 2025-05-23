@@ -1,0 +1,6 @@
+SUPERUSER:
+  USERNAME: admin
+  PASSWORD: admin123
+  EMAIL: 
+
+PORT: 8080
