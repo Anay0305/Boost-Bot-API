@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import yaml
+with open('./config.yaml', 'r') as file:
+    config = yaml.safe_load(file)
+
+base_url = config.get('BASE_URL')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,8 +32,8 @@ DEBUG = False
 ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://boostbot.rhhosting.pro',  # Add your domain here
-    'http://boostbot.rhhosting.pro',   # Optionally allow non-secure HTTP (if needed)
+    f'https://{base_url}',  # Add your domain here
+    f'http://{base_url}',   # Optionally allow non-secure HTTP (if needed)
 ]
 
 INSTALLED_APPS = [
