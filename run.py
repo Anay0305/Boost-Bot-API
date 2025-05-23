@@ -8,7 +8,7 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'WebApp.settings')
 django.setup()
 
 print("➡️ Making migrations...")
-call_command('makemigrations', interactive=False)
+call_command('makemigrations', 'API', interactive=False)
 
 print("➡️ Applying migrations...")
 call_command('migrate', interactive=False)
@@ -28,4 +28,6 @@ else:
     print(f"✅ Superuser '{username}' already exists.")
 
 print("🚀 Starting Uvicorn server...")
-uvicorn.run("WebApp.asgi:application", host="0.0.0.0", port=44062)
+print("Enter Port: ")
+port = input()
+uvicorn.run("WebApp.asgi:application", host="0.0.0.0", port=int(port))
