@@ -235,7 +235,7 @@ config.yaml  → Port, superuser, links
 
 ```bash
 # Clone & enter project
-git clone <repo-url>
+git clone https://github.com/Anay0305/Boost-Bot-API
 cd <project>
 
 # Create virtual environment
@@ -252,13 +252,6 @@ python manage.py migrate
 python manage.py runserver
 # Or use runner.py (auto-superuser, migrations, Uvicorn)
 ```
-
----
-
-## 📬 Contact
-
-**Anay Gupta**
-📧 [anaysumeet@gmail.com](mailto:anaysumeet@gmail.com)
 
 ---
 
